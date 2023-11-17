@@ -7,34 +7,44 @@ import java.util.List;
 
 public class AppBiblioteca {
 
-        public static void main(String[] args) {
-            Biblioteca biblioteca = new Biblioteca();
+    public static void main(String[] args) {
+        Biblioteca biblioteca = new Biblioteca();
 
-            biblioteca.agregarRecursoVargas(new Libro("El Quijote"));
-            biblioteca.agregarRecursoVargas(new Revista("National Geographic"));
-            biblioteca.agregarRecursoVargas(new Tesis("La teoría de la relatividad"));
-            biblioteca.agregarRecursoVargas(new Enciclopedia("Larousse"));
-            biblioteca.agregarRecursoVargas(new Periodico("El Tiempo"));
-            biblioteca.agregarRecursoVargas(new RecursoNoPrestable("Señor de los anillos"));
+        Libro libro = new Libro("100 años de soledad");
+        Revista revista = new Revista("Avon");
+        Periodico periodico = new Periodico("El tiempo");
+        Tesis tesis = new Tesis("El Capital");
+        Enciclopedia enciclopedia = new Enciclopedia("Wiki");
+
+        biblioteca.addRecursoVargas(libro);
+        biblioteca.addRecursoVargas(revista);
+        biblioteca.addRecursoVargas(periodico);
+        biblioteca.addRecursoVargas(tesis);
+        biblioteca.addRecursoVargas(enciclopedia);
 
 
-            Libro libro = (Libro) biblioteca.recursosHector.stream()
-                    .filter(r -> r.nombreHector.equals("El Quijote"))
-                    .findFirst()
-                    .get();
-            biblioteca.prestarRecursoVargas(libro);
-            System.out.println("El libro El Quijote se ha prestado " );
 
-            Periodico periodico = (Periodico) biblioteca.recursosHector.stream()
-                    .filter(r -> r.nombreHector.equals("El Tiempo"))
-                    .findFirst()
-                    .get();
-            biblioteca.devolverRecursoVargas(periodico);
-            System.out.println("El periodico El Tiempo ha sido devuelto");
 
+        Prestable[] recursos = {libro, revista,periodico, revista};
+        for (Prestable recurso : recursos) {
+            if (recurso.estaPrestadoHector()) {
+                throw new RuntimeException("El recurso ya está prestado");
+            } else {
+                System.out.println("No se pudo prestar: " + recurso);
+            }
         }
 
+
+        for (Prestable recurso : recursos) {
+            if (biblioteca.devolverRecursoVargas(recurso)) {
+                System.out.println("Se devolvió correctamente: " + recurso);
+            } else {
+                System.out.println("No se pudo devolver: " + recurso);
+            }
+        }
+        }
     }
+
 
 
 

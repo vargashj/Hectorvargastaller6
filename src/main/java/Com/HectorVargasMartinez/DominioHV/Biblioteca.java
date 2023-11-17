@@ -2,38 +2,48 @@ package Com.HectorVargasMartinez.DominioHV;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Biblioteca {
-    public List<Recurso> recursosHector;
+    // Atributos
+    private List <Recurso> recursoHector;
 
     public Biblioteca() {
-        this.recursosHector = new ArrayList<>();
+        this.recursoHector = new ArrayList<>();
     }
 
-    public void agregarRecursoVargas(Recurso r) {
-        if (r instanceof Prestable) {
-            this.recursosHector.add(r);
+
+    public void addRecursoVargas(Recurso rHector) {
+        if (rHector instanceof Prestable) {
+            ((Prestable) rHector).prestarVargas();
+            ((Prestable) rHector).devolverVargas();
+        }
+        recursoHector.add(rHector);
+    }
+    public boolean prestarRecursoVargas(Prestable recurso) {
+        if (recurso.estaPrestadoHector()) {
+            throw new RuntimeException("El recurso ya está prestado");
+        }
+
+        recurso.prestarVargas();
+        return true;
+    }
+
+
+    public boolean devolverRecursoVargas(Prestable pHector){
+        pHector.devolverVargas();
+        return true;
+    }
+    public void listarPrestadosVargas(){
+        System.out.println("Recursos prestados:");
+        for (Recurso recursoHector : recursoHector) {
+            if (recursoHector.isPrestadoHector()) {
+                System.out.println(recursoHector);
+            }
         }
     }
 
-    public void prestarRecursoVargas(Prestable p) {
-        if (p instanceof Prestable) {
-            p.prestarVargas();
-        } else {
-            throw new Error("El recurso no es prestable");
-        }
-    }
-    public boolean devolverRecursoVargas(Prestable p) {
-        if (p instanceof Recurso && ((Recurso) p).prestadoHector) {
-            p.devolverVargas();
-            return true;
-        }
-
-        return false;
-    }
-    public List<Recurso> listarPrestadoVargas() {
-        return this.recursosHector.stream().filter(r -> r.prestadoHector).collect(Collectors.toList());
+    public List<Recurso> getRecursoHector() {
+        return recursoHector;
     }
 }
 

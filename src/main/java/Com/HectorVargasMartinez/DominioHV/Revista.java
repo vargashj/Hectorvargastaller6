@@ -1,18 +1,19 @@
 package Com.HectorVargasMartinez.DominioHV;
 
-public class Revista extends Recurso implements Prestable {
-    public Revista(String nombre) {
-        super(nombre);
+public class Revista extends Recurso implements Prestable{
+
+
+    public Revista(String nombreHector) {
+        super(nombreHector);
     }
 
     @Override
     public void prestarVargas() {
-        this.prestadoHector = true;
+        this.setPrestadoHector(true);
     }
 
     @Override
-    public boolean devolverVargas() {
-        this.prestadoHector = false;
-        return false;
+    public void devolverVargas() {
+        this.setPrestadoHector(false);
     }
 }

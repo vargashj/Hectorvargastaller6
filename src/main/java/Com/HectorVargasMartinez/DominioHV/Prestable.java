@@ -2,7 +2,9 @@ package Com.HectorVargasMartinez.DominioHV;
 
 public interface Prestable {
     void prestarVargas();
+    void devolverVargas();
 
-    boolean devolverVargas();
+
+    boolean estaPrestadoHector();
 }
 

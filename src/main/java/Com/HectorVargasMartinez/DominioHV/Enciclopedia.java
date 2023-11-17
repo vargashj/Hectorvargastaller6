@@ -1,18 +1,9 @@
 package Com.HectorVargasMartinez.DominioHV;
 
-public class Enciclopedia extends Recurso implements Prestable {
-    public Enciclopedia(String nombre) {
-        super(nombre);
-    }
+public class Enciclopedia extends Recurso {
+        public Enciclopedia(String nombreHector) {
+            super(nombreHector);
+        }
 
-    @Override
-    public void prestarVargas() {
-        this.prestadoHector = true;
-    }
 
-    @Override
-    public boolean devolverVargas() {
-        this.prestadoHector = false;
-        return false;
-    }
 }
